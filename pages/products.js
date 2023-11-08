@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import $ from "jquery";
 import Navbar from "../components/Navbar";
+import { useCart } from "../components/CartContext";
 
 export default function Products() {
+  const { addToCart } = useCart();
+
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -76,6 +79,7 @@ export default function Products() {
               <tr key={product.id} onClick={() => {
                 setSelectedProduct(product);
                 setShowModal(true);
+                addToCart(product);
               }}>
               
                 <td>{product.id}</td>
